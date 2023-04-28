@@ -3,6 +3,7 @@ import { Layout, Button } from 'antd';
 import { TableContent } from './component/TableContent/TableContent';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { HomeFilled, TableOutlined, FormOutlined, LogoutOutlined } from '@ant-design/icons';
 import { fetchData } from './redux/action/data';
 
 import logo from './assest/image/logo.png'
@@ -33,15 +34,29 @@ function App() {
 
   return (
     <Layout className='wrapper'>
-      <Sider className='sider' style={{ padding: 10 }}>
-        <div className="sider__body">
-          <Link className='logo' to='/'><img src={logo} alt="Logo" width={42} height={42} />rozzoro</Link>
-          <div className="sider__list">
-            <Button block className='slider__button'>
-              Primary
-            </Button>
-            <Button block className='slider__button'>
-              <span>Table</span>
+      <Sider className='sider' >
+        <div className="sider__body" style={{ padding: '10px 10px 15px 10px' }}>
+          <div className="sider__top">
+            <Link className='logo' to='/'><img src={logo} alt="Logo" width={42} height={42} />rozzoro</Link>
+            <div className="sider__list">
+              <Button block className='sider__button'>
+                <HomeFilled style={{ fontSize: '0.7rem' }} />
+                <span>Primary</span>
+              </Button>
+              <Button block className='sider__button'>
+                <TableOutlined style={{ fontSize: '0.7rem' }} />
+                <span>Table</span>
+              </Button>
+              <Button block className='sider__button'>
+                <FormOutlined style={{ fontSize: '0.7rem' }} />
+                <span>Forms</span>
+              </Button>
+            </div>
+          </div>
+          <div className="sider__exit">
+            <Button block className='sider__button'>
+              <LogoutOutlined style={{ fontSize: '0.7rem' }} />
+              <span>Exit</span>
             </Button>
           </div>
         </div>
