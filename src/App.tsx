@@ -23,10 +23,13 @@ function App() {
 
   React.useEffect(() => {
     dispatch(fetchData());
+  }, []);
+
+  React.useEffect(() => {
     if (tenders.length > 0) {
       setIsLoaded(false)
     }
-  }, [tenders]);
+  }, [tenders])
 
   return (
     <Layout className='wrapper'>
