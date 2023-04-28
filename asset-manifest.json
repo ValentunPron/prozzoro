@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/prozzoro/static/css/main.3861688b.css",
+    "main.js": "/prozzoro/static/js/main.db4a9f64.js",
+    "static/media/logo.png": "/prozzoro/static/media/logo.52a5bd9ac2d36cae6474.png",
+    "index.html": "/prozzoro/index.html",
+    "main.3861688b.css.map": "/prozzoro/static/css/main.3861688b.css.map",
+    "main.db4a9f64.js.map": "/prozzoro/static/js/main.db4a9f64.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3861688b.css",
+    "static/js/main.db4a9f64.js"
+  ]
+}
