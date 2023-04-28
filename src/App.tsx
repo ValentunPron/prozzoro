@@ -1,56 +1,47 @@
 import React from 'react';
-import './App.css';
-import './scss/app.scss'
-import { Layout, Space } from 'antd';
+import { Layout } from 'antd';
+import { TableContent } from './component/TableContent/TableContent';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchData } from './redux/action/data';
 
 const { Header, Footer, Sider, Content } = Layout;
 
-const headerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  height: 60,
-  paddingInline: 50,
-  lineHeight: '64px',
-  backgroundColor: '#7dbcea',
-};
-
-const contentStyle: React.CSSProperties = {
-  textAlign: 'center',
-  minHeight: 120,
-  lineHeight: '120px',
-  color: '#fff',
-  backgroundColor: '#108ee9',
-};
-
-const siderStyle: React.CSSProperties = {
-  textAlign: 'center',
-  height: '100vh',
-  lineHeight: '120px',
-  color: '#fff',
-  backgroundColor: '#3ba0e9',
-};
-
-const footerStyle: React.CSSProperties = {
-  textAlign: 'center',
-  color: '#fff',
-  backgroundColor: '#7dbcea',
-};
-
 function App() {
-  return (
-    <div className="App">
-      <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
-        <Layout>
-          <Sider style={siderStyle}>Sider</Sider>
-          <Layout>
-            <Header style={headerStyle}>Header</Header>
-            <Content style={contentStyle}>
 
-            </Content>
-            <Footer style={footerStyle}>Footer</Footer>
-          </Layout>
+  const dispatch: Function = useDispatch();
+
+  const { tenders } = useSelector((data: any) => {
+    return {
+      tenders: data.data.items,
+    }
+  });
+
+  const [isLoaded, setIsLoaded] = React.useState(true);
+
+  React.useEffect(() => {
+    dispatch(fetchData());
+    if (tenders.length > 0) {
+      setIsLoaded(false)
+    }
+  }, [tenders]);
+
+  return (
+    <div className='wrapper'>
+      <Layout>
+        <Sider className='sider'>
+          <div className="sider__body">
+            <Link className='logo' to='/'>LOGO</Link>
+          </div>
+        </Sider>
+        <Layout>
+          <Header className='header'>Header</Header>
+          <Content className='content'>
+            <TableContent tenders={tenders} isLoaded={isLoaded} />
+          </Content>
+          <Footer className='footer'>Footer</Footer>
         </Layout>
-      </Space>
+      </Layout>
     </div>
   );
 }

@@ -1,0 +1,54 @@
+.html, .body {
+	min-height: 100%;
+}
+
+#root {
+	display: block;
+	height: 100%;
+}
+
+.wrapper {
+	display: flex;
+	overflow-x: hidden;
+	background-color: #f4f6f9;
+	min-height: 100%;
+}
+
+.header {
+	text-align: center;
+	color: #333;
+	padding: 50;
+	line-height: 64px;
+	background-color: #fff;
+}
+
+.content {
+	padding: 25px;
+	text-align: center;
+	line-height: 120px;
+	color: #fff;
+}
+
+.sider {
+	text-align: center;
+	line-height: 80px;
+	color: #fff;
+	background-color: #3ba0e9 !important;
+	.logo {
+		font-size: 1.5rem;
+		font-weight: 700;
+		transition: opacity .2s ease;
+		&:hover {
+			opacity: .7;
+		}
+	}
+	a {
+		color: inherit;
+	}
+}
+
+.footer {
+	text-align: center;
+	color: #fff;
+	background-color: #7dbcea;
+}
