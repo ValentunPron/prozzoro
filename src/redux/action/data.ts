@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const fetchData = (next_page?: string, prev_page?: string) => (dispatch: Function) => {
+export const fetchData = (next_page?: string,) => (dispatch: Function) => {
 	axios(next_page ? next_page : '/api/2.5/tenders').then(({ data }) => {
 		const fetchTenderData = async (tenders: any) => {
 			const promises = tenders.map((obj: { id: number }) =>
@@ -10,6 +10,11 @@ export const fetchData = (next_page?: string, prev_page?: string) => (dispatch: 
 			dispatch(setData(data));
 		};
 		fetchTenderData(data.data)
+		console.log(data.next_page.path, 'next')
+		if (data.next_page.path !== '/api/2.5/tenders?offset=1434981607.443577') {
+			dispatch(setPrevPage(data.prev_page.path));
+			console.log(data.prev_page.path, 'prev');
+		}
 		dispatch(setNextPage(data.next_page.path));
 	})
 }
@@ -28,4 +33,4 @@ export const setNextPage = (next_pages: string) => ({
 export const setPrevPage = (prev_pages: string) => ({
 	type: 'SET_PREV_PAGE',
 	payload: prev_pages
-})
+});

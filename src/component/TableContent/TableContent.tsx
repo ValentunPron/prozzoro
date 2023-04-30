@@ -3,7 +3,7 @@ import type { InputRef } from 'antd';
 import { Table, Button, Input, Space, } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnType, ColumnsType, TablePaginationConfig } from 'antd/es/table'
-import type { FilterConfirmProps, FilterValue, SorterResult } from 'antd/es/table/interface';
+import type { FilterConfirmProps, FilterValue, } from 'antd/es/table/interface';
 import Highlighter from 'react-highlight-words';
 import { useDispatch } from "react-redux";
 
@@ -202,6 +202,7 @@ export const TableContent = ({ tenders, isLoaded }: interfaceTableContent): JSX.
 			filters: [
 				{ text: 'e-tender.biz', value: 'e-tender.biz' },
 				{ text: 'prom.ua', value: 'prom.ua' },
+				{ text: 'newtend.com', value: 'newtend.com' }
 			],
 			width: '11%'
 		}

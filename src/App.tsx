@@ -3,7 +3,7 @@ import { Layout, Button } from 'antd';
 import { TableContent } from './component/TableContent/TableContent';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { HomeFilled, TableOutlined, FormOutlined, LogoutOutlined } from '@ant-design/icons';
+import { HomeFilled, TableOutlined, FormOutlined, LogoutOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { fetchData } from './redux/action/data';
 
 import logo from './assest/image/logo.png'
@@ -17,27 +17,29 @@ function App() {
   const { tenders, next_page, prev_page }: any = useSelector((data: any) => {
     return {
       tenders: data.data.items,
-      next_page: data.data.next_pages,
-      prev_pages: data.data.prev_pages,
+      next_page: data.data.next_page,
+      prev_page: data.data.prev_page,
     }
   });
 
   const [isLoaded, setIsLoaded] = React.useState(true);
+  const [totalCount, setTotalCount] = React.useState(1);
 
   React.useEffect(() => {
     dispatch(fetchData());
-    console.log(next_page);
   }, []);
 
   React.useEffect(() => {
+    console.log();
     setIsLoaded(true);
-  }, [next_page, prev_page])
+  }, [prev_page, next_page])
 
   React.useEffect(() => {
     if (tenders.length > 0) {
       setIsLoaded(false)
     }
   }, [tenders]);
+
   return (
     <Layout className='wrapper'>
       <Sider className='sider' >
@@ -81,9 +83,25 @@ function App() {
         </Header>
         <Content className='content'>
           <TableContent tenders={tenders} isLoaded={isLoaded} />
-          <button onClick={() => dispatch(fetchData(prev_page))}>prev pages</button>
-          <tr />
-          <button onClick={() => dispatch(fetchData(next_page))}>next pages</button>
+          <div className="content__nav">
+            <button
+              className={`content__arrow ${totalCount <= 1 ? 'close' : ''}`}
+              onClick={() => {
+                totalCount <= 1 ? setTotalCount(totalCount - 1) : setTotalCount(totalCount)
+                dispatch(fetchData(prev_page))
+              }}>
+              <LeftOutlined />
+            </button>
+            <Button className='content__total' type="primary" shape="circle" >{isLoaded ? '...' : totalCount}</Button>
+            <button
+              className='content__arrow'
+              onClick={() => {
+                setTotalCount(totalCount + 1);
+                dispatch(fetchData(next_page))
+              }}>
+              <RightOutlined />
+            </button>
+          </div>
         </Content>
         <Footer className='footer'>Footer</Footer>
       </Layout>
