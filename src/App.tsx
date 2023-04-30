@@ -14,9 +14,11 @@ function App() {
 
   const dispatch: Function = useDispatch();
 
-  const { tenders } = useSelector((data: any) => {
+  const { tenders, next_page, prev_page }: any = useSelector((data: any) => {
     return {
       tenders: data.data.items,
+      next_page: data.data.next_pages,
+      prev_pages: data.data.prev_pages,
     }
   });
 
@@ -24,14 +26,18 @@ function App() {
 
   React.useEffect(() => {
     dispatch(fetchData());
+    console.log(next_page);
   }, []);
+
+  React.useEffect(() => {
+    setIsLoaded(true);
+  }, [next_page, prev_page])
 
   React.useEffect(() => {
     if (tenders.length > 0) {
       setIsLoaded(false)
     }
-  }, [tenders])
-
+  }, [tenders]);
   return (
     <Layout className='wrapper'>
       <Sider className='sider' >
@@ -75,6 +81,9 @@ function App() {
         </Header>
         <Content className='content'>
           <TableContent tenders={tenders} isLoaded={isLoaded} />
+          <button onClick={() => dispatch(fetchData(prev_page))}>prev pages</button>
+          <tr />
+          <button onClick={() => dispatch(fetchData(next_page))}>next pages</button>
         </Content>
         <Footer className='footer'>Footer</Footer>
       </Layout>
