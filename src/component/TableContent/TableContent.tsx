@@ -204,7 +204,7 @@ export const TableContent = ({ tenders, isLoaded }: interfaceTableContent): JSX.
 				{ text: 'prom.ua', value: 'prom.ua' },
 				{ text: 'newtend.com', value: 'newtend.com' }
 			],
-			width: '11%'
+			width: '9%'
 		}
 	];
 
@@ -216,6 +216,8 @@ export const TableContent = ({ tenders, isLoaded }: interfaceTableContent): JSX.
 				loading={isLoaded}
 				pagination={{ pageSize: 100 }}
 				onChange={handleTableChange}
+				bordered={true}
+				size={'middle'}
 			/>
 		</>
 	);

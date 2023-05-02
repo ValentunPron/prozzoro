@@ -24,6 +24,7 @@ function App() {
 
   const [isLoaded, setIsLoaded] = React.useState(true);
   const [totalCount, setTotalCount] = React.useState(1);
+  const [burger, setBurger] = React.useState(false);
 
   React.useEffect(() => {
     dispatch(fetchData());
@@ -42,7 +43,7 @@ function App() {
 
   return (
     <Layout className='wrapper'>
-      <Sider className='sider' >
+      <Sider className={`sider ${burger ? 'active' : ''}`} >
         <div className="sider__body" style={{ padding: '10px 10px 15px 10px' }}>
           <div className="sider__top">
             <Link className='logo' to='/'><img src={logo} alt="Logo" width={42} height={42} />rozzoro</Link>
@@ -69,7 +70,7 @@ function App() {
           </div>
         </div>
       </Sider>
-      <Layout style={{ fontFamily: 'inherit' }}>
+      <Layout className='wrapper__body' style={{ fontFamily: 'inherit' }}>
         <Header className='header'>
           <Link to={'/'} className='header__info'>
             User Name
@@ -80,6 +81,7 @@ function App() {
               </g>
             </svg>
           </Link>
+          <button className={`burger  ${burger ? 'active' : ''}`} onClick={() => setBurger(!burger)}><span></span></button>
         </Header>
         <Content className='content'>
           <TableContent tenders={tenders} isLoaded={isLoaded} />
