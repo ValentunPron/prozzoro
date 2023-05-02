@@ -1,14 +1,13 @@
 import React from 'react';
-import { Layout, Button } from 'antd';
-import { TableContent } from './component/TableContent/TableContent';
-import { Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { HomeFilled, TableOutlined, FormOutlined, LogoutOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { fetchData } from './redux/action/data';
 
-import logo from './assest/image/logo.png'
+import { SidebarContent, HeaderContent, Navigation } from './component';
+import { FormsPages, MainPages, NotFound, TablePages } from './pages';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Content } = Layout;
 
 function App() {
 
@@ -23,7 +22,6 @@ function App() {
   });
 
   const [isLoaded, setIsLoaded] = React.useState(true);
-  const [totalCount, setTotalCount] = React.useState(1);
   const [burger, setBurger] = React.useState(false);
 
   React.useEffect(() => {
@@ -31,7 +29,6 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    console.log();
     setIsLoaded(true);
   }, [prev_page, next_page])
 
@@ -43,67 +40,17 @@ function App() {
 
   return (
     <Layout className='wrapper'>
-      <Sider className={`sider ${burger ? 'active' : ''}`} >
-        <div className="sider__body" style={{ padding: '10px 10px 15px 10px' }}>
-          <div className="sider__top">
-            <Link className='logo' to='/'><img src={logo} alt="Logo" width={42} height={42} />rozzoro</Link>
-            <div className="sider__list">
-              <Button block className='sider__button'>
-                <HomeFilled style={{ fontSize: '0.7rem' }} />
-                <span>Primary</span>
-              </Button>
-              <Button block className='sider__button'>
-                <TableOutlined style={{ fontSize: '0.7rem' }} />
-                <span>Table</span>
-              </Button>
-              <Button block className='sider__button'>
-                <FormOutlined style={{ fontSize: '0.7rem' }} />
-                <span>Forms</span>
-              </Button>
-            </div>
-          </div>
-          <div className="sider__exit">
-            <Button block className='sider__button'>
-              <LogoutOutlined style={{ fontSize: '0.7rem' }} />
-              <span>Exit</span>
-            </Button>
-          </div>
-        </div>
-      </Sider>
+      <SidebarContent burger={burger} />
       <Layout className='wrapper__body' style={{ fontFamily: 'inherit' }}>
-        <Header className='header'>
-          <Link to={'/'} className='header__info'>
-            User Name
-            <svg width="32" height="32" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <g fill="#54595d">
-                <path d="M 10 11 C 4.08 11 2 14 2 16 L 2 19 L 18 19 L 18 16 C 18 14 15.92 11 10 11 Z" />
-                <circle cx="10" cy="5.5" r="4.5" />
-              </g>
-            </svg>
-          </Link>
-          <button className={`burger  ${burger ? 'active' : ''}`} onClick={() => setBurger(!burger)}><span></span></button>
-        </Header>
+        <HeaderContent burger={burger} setBurger={setBurger} />
         <Content className='content'>
-          <TableContent tenders={tenders} isLoaded={isLoaded} />
-          <div className="content__nav">
-            <button
-              className={`content__arrow ${totalCount <= 1 ? 'close' : ''}`}
-              onClick={() => {
-                totalCount <= 1 ? setTotalCount(totalCount - 1) : setTotalCount(totalCount)
-                dispatch(fetchData(prev_page))
-              }}>
-              <LeftOutlined />
-            </button>
-            <Button className='content__total' type="primary" shape="circle" >{isLoaded ? '...' : totalCount}</Button>
-            <button
-              className='content__arrow'
-              onClick={() => {
-                setTotalCount(totalCount + 1);
-                dispatch(fetchData(next_page))
-              }}>
-              <RightOutlined />
-            </button>
-          </div>
+          <Routes>
+            <Route path='/' element={<MainPages />} />
+            <Route path='/table' element={<TablePages tenders={tenders} isLoaded={isLoaded} />} />
+            <Route path='/forms' element={<FormsPages />} />
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </Content>
         <Footer className='footer'>Footer</Footer>
       </Layout>

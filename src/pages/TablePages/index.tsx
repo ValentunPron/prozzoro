@@ -5,7 +5,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnType, ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import type { FilterConfirmProps, FilterValue, } from 'antd/es/table/interface';
 import Highlighter from 'react-highlight-words';
-import { useDispatch } from "react-redux";
+import { Navigation } from "../../component";
 
 export interface DataType {
 	procuringEntity: { name: string };
@@ -17,26 +17,25 @@ export interface DataType {
 }
 
 
-interface interfaceTableContent {
+interface ITableContent {
 	tenders: any,
 	isLoaded: boolean,
 }
 
-interface TableParams {
+interface ITableParams {
 	pagination?: TablePaginationConfig;
 	filters?: Record<string, FilterValue>;
 }
 
 type DataIndex = keyof DataType;
 
-export const TableContent = ({ tenders, isLoaded }: interfaceTableContent): JSX.Element => {
-	const dispatch: Function = useDispatch();
-
+export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element => {
 	const [data, setData] = React.useState([]);
+	const [totalCount, setTotalCount] = React.useState(1);
 	const [searchText, setSearchText] = React.useState('');
 	const [searchedColumn, setSearchedColumn] = React.useState('');
 	const searchInput = React.useRef<InputRef>(null);
-	const [tableParams, setTableParams] = React.useState<TableParams>({
+	const [tableParams, setTableParams] = React.useState<ITableParams>({
 		pagination: {
 			current: 1,
 			pageSize: 100,
@@ -219,6 +218,7 @@ export const TableContent = ({ tenders, isLoaded }: interfaceTableContent): JSX.
 				bordered={true}
 				size={'middle'}
 			/>
+			<Navigation totalCount={totalCount} setTotalCount={setTotalCount} isLoaded={isLoaded} />
 		</>
 	);
 }
