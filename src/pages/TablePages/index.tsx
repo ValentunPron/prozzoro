@@ -8,12 +8,13 @@ import Highlighter from 'react-highlight-words';
 import { Navigation } from "../../component";
 
 export interface DataType {
-	procuringEntity: { name: string };
+	name: string,
+	edrpou: string,
+	cod_dk: string,
 	minimalStep: { amount: number },
-	status: string,
 	title: string,
 	description: string,
-	owner: string
+	link: string
 }
 
 
@@ -165,6 +166,35 @@ export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element =>
 			key: 'name',
 		},
 		{
+			title: 'EDRPOU',
+			dataIndex: ['procuringEntity', 'identifier', 'id'],
+			key: 'edrpou',
+		},
+		{
+			title: 'Cod DK',
+			dataIndex: ['items'],
+			key: 'cod_dk',
+			render: (items) => {
+				return (
+					<>
+						{items.map((item: any) => (
+							<div key={item.classification.id}>{item.classification.id}</div>
+						))}
+					</>
+				);
+			},
+			width: 90
+		},
+		{
+			title: 'Price',
+			dataIndex: ['minimalStep', 'amount'],
+			key: 'price',
+			sorter: (a, b) => a.minimalStep.amount - b.minimalStep.amount,
+			render: (text, record) => (
+				<span>{text} ₴</span>
+			),
+		},
+		{
 			title: 'Title',
 			dataIndex: 'title',
 			key: 'title',
@@ -177,33 +207,10 @@ export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element =>
 			...getColumnSearchProps('description'),
 		},
 		{
-			title: 'Price',
-			dataIndex: ['minimalStep', 'amount'],
-			key: 'price',
-			sorter: (a, b) => a.minimalStep.amount - b.minimalStep.amount,
-			render: (text, record) => (
-				<span>{text} ₴</span>
-			),
-		},
-		{
-			title: 'Status',
-			dataIndex: 'status',
-			key: 'status',
-			filters: [
-				{ text: 'Unsuccessful', value: 'unsuccessful' },
-				{ text: 'Cancelled', value: 'cancelled' },
-			],
-		},
-		{
-			title: 'Owner',
-			dataIndex: 'owner',
-			key: 'owner',
-			filters: [
-				{ text: 'e-tender.biz', value: 'e-tender.biz' },
-				{ text: 'prom.ua', value: 'prom.ua' },
-				{ text: 'newtend.com', value: 'newtend.com' }
-			],
-			width: '9%'
+			title: 'Link',
+			dataIndex: 'tenderID',
+			key: 'link',
+			render: (text) => <a target="_blank" href={`https://prozorro.gov.ua/tender/${text}`}>https://prozorro.gov.ua/tender/{text}</a>
 		}
 	];
 

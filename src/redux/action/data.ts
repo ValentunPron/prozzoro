@@ -14,7 +14,6 @@ export const fetchData = (next_page?: string,) => (dispatch: Function) => {
 		console.log(data.next_page.path, 'next')
 		if (data.next_page.path !== '/api/2.5/tenders?offset=1434981607.443577') {
 			dispatch(setPrevPage(data.prev_page.path));
-			console.log(data.prev_page.path, 'prev');
 		}
 		dispatch(setNextPage(data.next_page.path));
 	})

@@ -4,7 +4,7 @@ import { Layout } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from './redux/action/data';
 
-import { SidebarContent, HeaderContent, Navigation } from './component';
+import { SidebarContent, HeaderContent } from './component';
 import { FormsPages, MainPages, NotFound, TablePages } from './pages';
 
 const { Footer, Content } = Layout;

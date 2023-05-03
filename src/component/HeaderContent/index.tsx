@@ -11,6 +11,7 @@ const { Header } = Layout
 export const HeaderContent = ({ burger, setBurger }: IHeaderContent): JSX.Element => {
 	return (
 		<Header className='header'>
+			<button className={`burger  ${burger ? 'active' : ''}`} onClick={() => setBurger(!burger)}><span></span></button>
 			<Link to={'/'} className='header__info'>
 				User Name
 				<svg width="32" height="32" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +21,6 @@ export const HeaderContent = ({ burger, setBurger }: IHeaderContent): JSX.Elemen
 					</g>
 				</svg>
 			</Link>
-			<button className={`burger  ${burger ? 'active' : ''}`} onClick={() => setBurger(!burger)}><span></span></button>
 		</Header>
 	);
 }
