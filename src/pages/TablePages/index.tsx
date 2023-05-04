@@ -5,7 +5,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnType, ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import type { FilterConfirmProps, FilterValue, } from 'antd/es/table/interface';
 import Highlighter from 'react-highlight-words';
-import { Navigation } from "../../component";
+import { Navigation, TableTop } from "../../component";
 
 export interface DataType {
 	name: string,
@@ -45,7 +45,6 @@ export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element =>
 
 	React.useEffect(() => {
 		setData(tenders);
-		console.log(data.length);
 	}, [tenders]);
 
 	const handleSearch = (selectedKeys: string[], confirm: (param?: FilterConfirmProps) => void, dataIndex: DataIndex) => {
@@ -136,23 +135,6 @@ export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element =>
 			),
 	});
 
-	React.useEffect(() => {
-		const filterData = tenders.filter((item: { status: string, owner: string }) => {
-			if (tableParams.filters) {
-				const { status, owner } = tableParams.filters;
-
-				if (status && status.length > 0 && !status.includes(item.status)) {
-					return false;
-				}
-				if (owner && owner.length > 0 && !owner.includes(item.owner)) {
-					return false;
-				}
-				return true;
-			}
-		})
-		setData(filterData);
-	}, [tableParams])
-
 	const handleTableChange = (pagination: TablePaginationConfig, filters: any, sorter: any) => {
 		setTableParams({ pagination, filters, ...sorter });
 		if (pagination.pageSize !== tableParams.pagination?.pageSize) {
@@ -215,7 +197,8 @@ export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element =>
 	];
 
 	return (
-		<>
+		<div className="talbe">
+			<TableTop />
 			<Table
 				columns={columns}
 				dataSource={data.length === 0 ? tenders : data}
@@ -226,6 +209,6 @@ export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element =>
 				size={'middle'}
 			/>
 			<Navigation totalCount={totalCount} setTotalCount={setTotalCount} isLoaded={isLoaded} />
-		</>
+		</div>
 	);
 }

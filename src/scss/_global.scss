@@ -23,6 +23,7 @@ html {
 	position: relative;
 	display: flex;
 	overflow-x: hidden;
+	color: #000;
 	background-color: #f4f6f9;
 	min-height: 100%;
 }
@@ -55,7 +56,7 @@ html {
 
 .content {
 	padding: 25px;
-	line-height: 120px;
+	line-height: 1rem;
 	color: #fff;
 	&__nav {
 		margin-top: 25px;
@@ -83,6 +84,39 @@ html {
 	transition: opacity .2s ease;
 	&:hover {
 		opacity: .7;
+	}
+}
+
+.table-top {
+	&__title {
+		font-size: 1.1rem;
+		font-weight: 700;
+		color: #000;
+	}
+	&__action {
+		margin: 25px 0;
+	}
+	&__button-span {
+		font-weight: 500;
+	}
+}
+
+.button {
+	display: inline-flex;
+	gap: 5px;
+	background: #000;
+	border: 1.5px solid #000;
+	font-size: 0.75rem;
+	font-weight: 400;
+	height: auto;
+	border-radius: 25px;
+	line-height: 1;
+	padding: 8px 20px;
+	&:hover {
+		border: 1.5px solid transparent;
+	}
+	&.white {
+		background-color: transparent;
 	}
 }
 
@@ -185,6 +219,69 @@ html {
 .ant-table td,
 .ant-table th {
   font-size: 0.575rem;
+}
+
+.ant-modal  {
+	width: 620px !important;
+	.ant-modal-title {
+		font-size: 1rem;
+		font-weight: 700;
+		margin-bottom: 30px;
+	}
+	.ant-modal-footer {
+		display: flex;
+		justify-content: right;
+		gap: 10px;
+		margin-top: 30px;
+	}
+}
+
+.form {
+	display: flex;
+	gap: 50px;
+	flex-direction: column;
+	.form__input {
+		display: block !important;
+	}
+}
+
+.ant-form-item-row {
+	text-align: left;
+	flex-direction: column;
+	.ant-form-item-label {
+		text-align: left;
+		line-height: 1rem;
+		margin-bottom: 5px;
+		label {
+			display: inline;
+		}
+	}
+}
+
+.my-input {
+	position: relative;
+	width: 100%;
+	padding-bottom: 3px;
+	padding-left: 12px;
+	font-size: 0.7rem;
+	border-bottom: 1px solid #999;
+}
+
+.input-hover {
+	top: 2px;
+	right: 0;
+	position: absolute;
+}
+
+.poput {
+	display: flex;
+	flex-direction: column;
+	max-height: 100px;
+	overflow-y: auto;
+	gap: 5px;
+	button {
+		font-size: 0.55rem;
+	}
 }
 
 @media (max-width: 1240px) {
