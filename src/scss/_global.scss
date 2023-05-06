@@ -238,10 +238,21 @@ html {
 
 .form {
 	display: flex;
-	gap: 50px;
+	gap: 60px;
 	flex-direction: column;
 	.form__input {
 		display: block !important;
+	}
+	.ant-form-item-explain-error {
+		font-size: 0.5rem;
+	}
+	&__footer {
+		display: flex;
+		justify-content: right;
+		padding-bottom: 10px;
+		button + button {
+			margin-left: 20px;
+		}
 	}
 }
 

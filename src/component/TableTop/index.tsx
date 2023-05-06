@@ -29,17 +29,8 @@ export const TableTop = () => {
 					</Button>
 				</div>
 			</div>
-			<Modal title="Новий користувач" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
-				footer={[
-					<Button className="button white" key="back" onClick={handleCancel}>
-						Return
-					</Button>,
-					<Button className="button" htmlType="submit" key="submit" type="primary">
-						Submit
-					</Button>
-				]}
-			>
-				<FormAdd />
+			<Modal title="Новий користувач" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={false}>
+				<FormAdd onOk={handleOk} onCancel={handleCancel} />
 			</Modal >
 		</>
 	);
