@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Modal } from 'antd';
-import { FormAdd } from "../FormAdd";
+import { UserAdd } from "../UserAdd";
 
 export const TableTop = () => {
 	const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -30,7 +30,7 @@ export const TableTop = () => {
 				</div>
 			</div>
 			<Modal title="Новий користувач" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={false}>
-				<FormAdd onOk={handleOk} onCancel={handleCancel} />
+				<UserAdd onOk={handleOk} onCancel={handleCancel} />
 			</Modal >
 		</>
 	);

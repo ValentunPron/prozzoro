@@ -3,19 +3,20 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchData } from './redux/action/data';
+import { fetchUser } from './redux/action/user';
 
 import { SidebarContent, HeaderContent } from './component';
-import { FormsPages, MainPages, NotFound, TablePages } from './pages';
+import { UserPages, MainPages, NotFound, TablePages } from './pages';
 
 const { Footer, Content } = Layout;
 
 function App() {
-
   const dispatch: Function = useDispatch();
 
-  const { tenders, next_page, prev_page }: any = useSelector((data: any) => {
+  const { tenders, user, next_page, prev_page }: any = useSelector((data: any) => {
     return {
       tenders: data.data.items,
+      user: data.user.items,
       next_page: data.data.next_page,
       prev_page: data.data.prev_page,
     }
@@ -25,8 +26,13 @@ function App() {
   const [burger, setBurger] = React.useState(false);
 
   React.useEffect(() => {
+    dispatch(fetchUser());
     dispatch(fetchData());
   }, []);
+
+  React.useEffect(() => {
+    console.log(user);
+  }, [user])
 
   React.useEffect(() => {
     setIsLoaded(true);
@@ -47,7 +53,7 @@ function App() {
           <Routes>
             <Route path='/' element={<MainPages />} />
             <Route path='/table' element={<TablePages tenders={tenders} isLoaded={isLoaded} />} />
-            <Route path='/forms' element={<FormsPages />} />
+            <Route path='/user' element={<UserPages userData={user} />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>

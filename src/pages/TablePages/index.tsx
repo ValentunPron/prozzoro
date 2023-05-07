@@ -198,7 +198,6 @@ export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element =>
 
 	return (
 		<div className="talbe">
-			<TableTop />
 			<Table
 				columns={columns}
 				dataSource={data.length === 0 ? tenders : data}

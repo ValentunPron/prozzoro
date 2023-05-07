@@ -1,6 +1,6 @@
-import { FormsPages } from './FormsPages';
+import { UserPages } from './UserPages';
 import { MainPages } from "./MainPages";
 import { NotFound } from "./NotFound";
 import { TablePages } from "./TablePages";
 
-export { FormsPages, MainPages, NotFound, TablePages }
+export { UserPages, MainPages, NotFound, TablePages }

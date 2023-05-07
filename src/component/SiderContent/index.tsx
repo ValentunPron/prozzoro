@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import { HomeFilled, TableOutlined, FormOutlined, LogoutOutlined } from '@ant-design/icons';
+import { HomeFilled, TableOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 import logo from '../../assest/image/logo.png'
 
@@ -30,10 +30,10 @@ export const SidebarContent = ({ burger }: ISidebarContent): JSX.Element => {
 								<span>Table</span>
 							</Button>
 						</Link>
-						<Link to="/forms">
+						<Link to="/user">
 							<Button block className='sider__button'>
-								<FormOutlined style={{ fontSize: '0.7rem' }} />
-								<span>Forms</span>
+								<UserOutlined style={{ fontSize: '0.7rem' }} />
+								<span>User</span>
 							</Button>
 						</Link>
 					</div>

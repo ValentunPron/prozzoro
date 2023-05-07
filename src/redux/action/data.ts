@@ -7,11 +7,9 @@ export const fetchData = (next_page?: string,) => (dispatch: Function) => {
 				axios.get(`/api/2.5/tenders/${obj.id}`).then((res) => res.data.data)
 			);
 			const data: any = await Promise.all(promises);
-			console.log(data);
 			dispatch(setData(data));
 		};
 		fetchTenderData(data.data)
-		console.log(data.next_page.path, 'next')
 		if (data.next_page.path !== '/api/2.5/tenders?offset=1434981607.443577') {
 			dispatch(setPrevPage(data.prev_page.path));
 		}

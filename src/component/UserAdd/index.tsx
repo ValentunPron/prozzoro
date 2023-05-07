@@ -1,16 +1,27 @@
 import { Button, Col, Form, Row } from "antd"
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../redux/action/user";
 
 interface IFormAdd {
 	onOk: Function,
 	onCancel: Function
 }
 
-export const FormAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
+export const UserAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
+	const dispatch: Function = useDispatch();
 	const onFinish = (values: any) => {
-		console.log('Success:', values);
-		alert('Користува успішно добавлено')
+		const fullName = `${values.surname} ${values.name} ${values.fatherly}`;
+		delete values.surname;
+		delete values.name;
+		delete values.fatherly;
+		const user = {
+			...values,
+			fullName
+		};
+		alert('Користува успішно добавлено');
 		onOk();
+		dispatch(addUser(user));
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -68,14 +79,14 @@ export const FormAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
 				</Col>
 				<Col span={12}>
 					<Form.Item
-						label="Телефон робочий"
-						name="work-tel"
+						label="Телефон мобільний"
+						name="phone"
 						rules={[
-							{ required: true, message: 'Будь ласка, введіть номер робочого телефона!' },
-							{ min: 3, message: 'Номер має містити не мешне 3 символів' },
+							{ required: true, message: 'Будь ласка, введіть номер мобільного телефона!' },
+							{ pattern: /^\+380\d{10}$/, message: 'Будь ласка, введіть коректний номер телефону', },
 						]}
 					>
-						<input className="my-input" type='tel' name='work-tel' />
+						<input className="my-input" type="tel" name="phone" defaultValue={'+380'} maxLength={14} />
 					</Form.Item>
 				</Col>
 			</Row>
@@ -94,14 +105,11 @@ export const FormAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
 				</Col>
 				<Col span={12}>
 					<Form.Item
-						label="Телефон мобільний"
-						name="tel"
-						rules={[
-							{ required: true, message: 'Будь ласка, введіть номер мобільного телефона!' },
-							{ pattern: /^\+380\d{10}$/, message: 'Будь ласка, введіть коректний номер телефону', },
-						]}
+						label="Електронна пошта"
+						name="email"
+						rules={[{ required: true, message: 'Будь ласка, введіть електронну пошту!' }]}
 					>
-						<input className="my-input" type="tel" name="tel" defaultValue={'+380'} maxLength={14} />
+						<input className="my-input" type="email" name="email" placeholder="email@gmail.com" />
 					</Form.Item>
 				</Col>
 			</Row>
@@ -116,41 +124,6 @@ export const FormAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
 						]}
 					>
 						<input className="my-input" type="tel" name="fatherly" />
-					</Form.Item>
-				</Col>
-				<Col span={12}>
-					<Form.Item
-						label="Електронна пошта"
-						name="email"
-						rules={[{ required: true, message: 'Будь ласка, введіть електронну пошту!' }]}
-					>
-						<input className="my-input" type="email" name="email" placeholder="email@gmail.com" />
-					</Form.Item>
-				</Col>
-			</Row>
-			<Row gutter={24}>
-				<Col span={12}>
-					<Form.Item
-						label="ІПН"
-						name="cods"
-						rules={[
-							{ required: true, message: 'Будь ласка, введіть ІПН!' },
-							{ min: 3, message: 'ІПН має містити не мешне 3 символів' }
-						]}
-					>
-						<input className="my-input" type="text" name="cods" />
-					</Form.Item>
-				</Col>
-				<Col span={12}>
-					<Form.Item
-						label="Посада"
-						name="position"
-						rules={[
-							{ message: 'Будь ласка, введіть посаду!' },
-							{ min: 3, message: 'Назва має містити не мешне 3 символів', }
-						]}
-					>
-						<input className="my-input" type="text" name="position" />
 					</Form.Item>
 				</Col>
 			</Row>
