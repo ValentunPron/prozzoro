@@ -461,3 +461,25 @@ html {
 		}
 	}
 }
+
+@media (max-width: 500px) {
+	.form {
+		gap: 20px;
+		&__footer {
+			margin-top: 10px;
+		}
+	}
+	.modal {
+		background-color: #ffffff;
+		height: 100vh !important;
+		width: 100vw !important;
+	}
+	.ant-row {
+		display: flex;
+		flex-direction: column;
+		div {
+			width: 100%;
+			max-width: 100%;
+		}
+	}
+}

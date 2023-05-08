@@ -54,7 +54,7 @@ export const UserPages = ({ userData }: IUserPages): JSX.Element => {
 	return (
 		<div className="talbe">
 			<TableTop />
-			<Table columns={columns} dataSource={data.length > 0 ? data : userData} />
+			<Table columns={columns} dataSource={data.length > 0 ? data : userData} scroll={{ x: 500 }} />
 		</div>
 	);
 }

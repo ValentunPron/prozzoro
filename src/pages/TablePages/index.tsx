@@ -205,6 +205,7 @@ export const TablePages = ({ tenders, isLoaded }: ITableContent): JSX.Element =>
 				pagination={{ pageSize: 100 }}
 				onChange={handleTableChange}
 				bordered={true}
+				scroll={{ x: 600 }}
 				size={'middle'}
 			/>
 			<Navigation totalCount={totalCount} setTotalCount={setTotalCount} isLoaded={isLoaded} />

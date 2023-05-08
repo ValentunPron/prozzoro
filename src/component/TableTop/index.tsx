@@ -29,7 +29,7 @@ export const TableTop = () => {
 					</Button>
 				</div>
 			</div>
-			<Modal title="Новий користувач" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={false}>
+			<Modal className="modal" title="Новий користувач" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={false}>
 				<UserAdd onOk={handleOk} onCancel={handleCancel} />
 			</Modal >
 		</>
