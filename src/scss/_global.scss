@@ -169,10 +169,6 @@ html {
 	}
 }
 
-.ant-select-selector {
-	display: none !important;
-}
-
 .burger {
 	display: none;
 	position: relative;
@@ -238,14 +234,8 @@ html {
 
 .form {
 	display: flex;
-	gap: 60px;
+	gap: 10px;
 	flex-direction: column;
-	.form__input {
-		display: block !important;
-	}
-	.ant-form-item-explain-error {
-		font-size: 0.5rem;
-	}
 	&__footer {
 		display: flex;
 		justify-content: right;
@@ -256,43 +246,10 @@ html {
 	}
 }
 
-.ant-form-item-row {
-	text-align: left;
-	flex-direction: column;
-	.ant-form-item-label {
-		text-align: left;
-		line-height: 1rem;
-		margin-bottom: 5px;
-		label {
-			display: inline;
-		}
-	}
-}
-
-.my-input {
-	position: relative;
-	width: 100%;
-	padding-bottom: 3px;
-	padding-left: 12px;
-	font-size: 0.7rem;
-	border-bottom: 1px solid #999;
-}
-
 .input-hover {
 	top: 2px;
 	right: 0;
 	position: absolute;
-}
-
-.poput {
-	display: flex;
-	flex-direction: column;
-	max-height: 100px;
-	overflow-y: auto;
-	gap: 5px;
-	button {
-		font-size: 0.55rem;
-	}
 }
 
 @media (max-width: 1240px) {
@@ -403,6 +360,9 @@ html {
 			}
 		}
 	}
+	.form {
+		gap: 5px;
+	}
 }
 
 @media (max-width: 764px) {
@@ -459,6 +419,14 @@ html {
 		&.active {
 			left: 0;
 		}
+	}
+	.form {
+		gap: 0px;
+	}
+	.ant-modal-content {
+		top: 0;
+		margin-left: -16px;
+		width: 100vw;
 	}
 }
 

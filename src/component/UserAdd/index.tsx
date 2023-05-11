@@ -1,5 +1,5 @@
-import { Button, Col, Form, Row } from "antd"
 import React from "react";
+import { Button, Col, Form, Input, Row, Select } from "antd"
 import { useDispatch } from "react-redux";
 import { addUser } from "../../redux/action/user";
 
@@ -8,20 +8,17 @@ interface IFormAdd {
 	onCancel: Function
 }
 
+const { Option } = Select;
+
 export const UserAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
 	const dispatch: Function = useDispatch();
+	const [form] = Form.useForm();
+
 	const onFinish = (values: any) => {
-		const fullName = `${values.surname} ${values.name} ${values.fatherly}`;
-		delete values.surname;
-		delete values.name;
-		delete values.fatherly;
-		const user = {
-			...values,
-			fullName
-		};
-		alert('Користува успішно добавлено');
 		onOk();
-		dispatch(addUser(user));
+		dispatch(addUser(values));
+		form.resetFields();
+		alert('Користува успішно добавлено');
 	};
 
 	const onFinishFailed = (errorInfo: any) => {
@@ -33,7 +30,8 @@ export const UserAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
 	return (
 		<Form
 			className="form"
-			name="basic"
+			form={form}
+			layout="vertical"
 			initialValues={{ remember: true }}
 			onFinish={onFinish}
 			onFinishFailed={onFinishFailed}
@@ -41,16 +39,35 @@ export const UserAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
 			<Row gutter={24}>
 				<Col span={12}>
 					<Form.Item
+						label="ПІБ"
+						name="fullName"
+						rules={[
+							{ required: true, message: 'Будь ласка, введіть ПІБ!' },
+							{ min: 3, message: 'Назва має містити не мешне 3 символів', },
+						]}
+					>
+						<Input />
+					</Form.Item>
+				</Col>
+				<Col span={12}>
+					<Form.Item
 						label="Група"
 						name="group"
 						rules={[
 							{ required: true, message: 'Будь ласка, введіть групу!' },
-							{ min: 3, message: 'Назва має містити не мешне 3 символів', },
 						]}
 					>
-						<input className="my-input" type="text" name='group' />
+						<Select>
+							<Option value="Керівник НПІ">Керівник НПІ</Option>
+							<Option value="Член HTP">Член HTP</Option>
+							<Option value="Експерт">Експерт</Option>
+							<Option value="Організатор екзпертизи">Організатор екзпертизи</Option>
+							<Option value="Студент">Студент</Option>
+						</Select>
 					</Form.Item>
 				</Col>
+			</Row>
+			<Row gutter={24}>
 				<Col span={12}>
 					<Form.Item
 						label="Назва організації"
@@ -60,21 +77,7 @@ export const UserAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
 							{ min: 3, message: 'Назва має містити не мешне 5 символів', },
 						]}
 					>
-						<input className="my-input" type='text' name='organization' />
-					</Form.Item>
-				</Col>
-			</Row>
-			<Row gutter={24}>
-				<Col span={12}>
-					<Form.Item
-						label="Прізвище"
-						name="surname"
-						rules={[
-							{ required: true, message: 'Будь ласка, введіть прізвище!' },
-							{ min: 3, message: 'Назва має містити не мешне 5 символів', },
-						]}
-					>
-						<input className="my-input" type='text' name='surname' />
+						<Input />
 					</Form.Item>
 				</Col>
 				<Col span={12}>
@@ -83,47 +86,21 @@ export const UserAdd = ({ onOk, onCancel }: IFormAdd): JSX.Element => {
 						name="phone"
 						rules={[
 							{ required: true, message: 'Будь ласка, введіть номер мобільного телефона!' },
-							{ pattern: /^\+380\d{10}$/, message: 'Будь ласка, введіть коректний номер телефону', },
+							{ pattern: /^\+380\d{9}$/, message: 'Будь ласка, введіть коректний номер телефону', },
 						]}
 					>
-						<input className="my-input" type="tel" name="phone" defaultValue={'+380'} maxLength={14} />
+						<Input defaultValue={'+380'} maxLength={13} />
 					</Form.Item>
 				</Col>
 			</Row>
 			<Row gutter={24}>
-				<Col span={12}>
-					<Form.Item
-						label="Ім'я"
-						name="name"
-						rules={[
-							{ required: true, message: 'Будь ласка, введіть ім\'я!' },
-							{ min: 3, message: 'Ім\'я має містити не мешне 3 символів', },
-						]}
-					>
-						<input className="my-input" type='text' name='name' />
-					</Form.Item>
-				</Col>
 				<Col span={12}>
 					<Form.Item
 						label="Електронна пошта"
 						name="email"
 						rules={[{ required: true, message: 'Будь ласка, введіть електронну пошту!' }]}
 					>
-						<input className="my-input" type="email" name="email" placeholder="email@gmail.com" />
-					</Form.Item>
-				</Col>
-			</Row>
-			<Row gutter={24}>
-				<Col span={12}>
-					<Form.Item
-						label="По-батькові"
-						name="fatherly"
-						rules={[
-							{ required: true, message: 'Будь ласка, введіть по-батькові!' },
-							{ min: 3, message: 'Назва має містити не мешне 3 символів', },
-						]}
-					>
-						<input className="my-input" type="tel" name="fatherly" />
+						<Input placeholder="email@gmail.com" />
 					</Form.Item>
 				</Col>
 			</Row>
