@@ -31,10 +31,6 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    console.log(user);
-  }, [user])
-
-  React.useEffect(() => {
     setIsLoaded(true);
   }, [prev_page, next_page])
 
