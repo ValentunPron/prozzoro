@@ -49,7 +49,7 @@ export const UserPages = ({ userData }: IUserPages): JSX.Element => {
 
 	React.useEffect(() => {
 		setData(userData);
-	}, [])
+	}, [userData])
 
 	return (
 		<div className="talbe">
