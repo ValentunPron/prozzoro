@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/prozzoro/static/css/main.88e8410e.css",
-    "main.js": "/prozzoro/static/js/main.b920cc1b.js",
+    "main.js": "/prozzoro/static/js/main.1915e98f.js",
     "static/media/logo.png": "/prozzoro/static/media/logo.52a5bd9ac2d36cae6474.png",
     "index.html": "/prozzoro/index.html",
     "main.88e8410e.css.map": "/prozzoro/static/css/main.88e8410e.css.map",
-    "main.b920cc1b.js.map": "/prozzoro/static/js/main.b920cc1b.js.map"
+    "main.1915e98f.js.map": "/prozzoro/static/js/main.1915e98f.js.map"
   },
   "entrypoints": [
     "static/css/main.88e8410e.css",
-    "static/js/main.b920cc1b.js"
+    "static/js/main.1915e98f.js"
   ]
 }
